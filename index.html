@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ember Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+
+  <script src="libs/jquery-1.10.2.js"></script>
+  <script src="libs/handlebars-v2.0.0.js"></script>
+  <script src="libs/ember-handlebars-loader-0.0.1.js"></script>
+  <script src="libs/ember-1.9.1.js"></script>
+  <script src="libs/bootstrap.js"></script>
+  <script src="libs/bootstrap-modal.js"></script>
+  <script src="libs/ember-data.js"></script>
+  <script src="libs/localstorage_adapter.js"></script>
+
+
+
+  <script src="app.js"></script>
+<script>
+  //EmberHandlebarsLoader.loadTemplates(['projects']);
+  </script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</head>
+<body>
+  <script type="text/x-handlebars" >
+    <h1>Welcome to Ember.js</h1>
+    <button {{action 'tohome'}} class='btn btn-primary'>Home</button>
+    <button {{action 'tousers'}} class='btn btn-info'>Users</button>
+    <button {{action 'toprojects'}} class='btn btn-danger'>Projects</button>
+    <button {{action 'tocompanies'}} class='btn btn-danger'>Companies</button>
+    <button {{action 'toindex'}} class='btn btn-info'>
+    {{#if about}}
+    Shrink
+    {{else}}
+    About
+    {{/if}}
+    </button>    {{#if about}}
+    <h3>What About Our Site.</h3>
+    <ul>
+    <li>Explore Contents.</li>
+    <li>Read Some News.</li>
+    <li>Play Some Games.</li>
+    <li>Need Some Help.</li>
+    </ul>
+    {{/if}}
+    {{outlet}}
+    <br>
+
+  </script>
+  <script type="text/x-handlebars" id="index">
+    <ul>
+    {{#each item in model}}
+      <li>{{item}}</li>
+    {{/each}}
+    </ul>
+    
+    <hr>
+    {{view.name}}
+    {{view.say}}
+    {{#view "clickable"}}
+    This is a clickable area!
+    {{/view}}
+    {{view "select" content=names}}
+    <hr>
+    {{names}}
+    <h2>{{App.secondsOnPage}}</h2>
+    <h2>{{App.variable}}</h2>
+  </script>
+  <script type='text/x-handlebars' id='users'>
+  <h1>Hello from users template</h1>
+  <ul>
+  {{#each}}
+  <li>{{#link-to "user" this}}{{first}}{{/link-to}}</li>
+  {{/each}}
+  <div>
+  {{outlet}}
+  </div>
+  </script>
+  <script type='text/x-handlebars' id='user'>
+  <h1>Hello from user page</h1>
+  <ul>
+  <li>{{first}}</li>
+  <li>{{last}}</li>
+  <li>{{age}}</li>
+  <li><img {{bindAttr src='image'}} class='pull-right' width=150 /></li>
+  </script>
+
+   <script type='text/x-handlebars' id='projects'>
+
+  <h1>Hello from projects template</h1>
+  <ul>
+  {{#each}}
+  <li>{{#link-to 'project' this }}{{name}}{{/link-to}}</li>
+  {{/each}}
+  </ul
+  <div>
+  {{outlet}}
+  </div>
+  </script>
+
+<script type='text/x-handlebars' id='project'>
+  <h2>Hello from project page</h2>
+  <ul>
+  <li>{{name}}</li>
+  <li>{{country}}</li>
+  <li>{{time}}</li>
+  <li><img {{bindAttr src='image'}} class='pull-right' width=150 /></li>
+  </ul>
+  </script>
+  <script type='text/x-handlebars' id='companies'>
+  <h2>List of Companies</h2>
+  <ul>
+  {{#each}}
+  <li>{{#link-to 'company' this}}{{name}}{{/link-to}}</li>
+  {{/each}}
+    <div>
+    {{outlet}}
+    </div>
+  </script>
+  <script type="text/x-handlebars" id='company'>
+  <h2>the data of the company</h2>
+  <ul>
+  <li>{{name}}</li>
+  <li>{{country}}</li>
+  <li>{{time}}</li>
+  <li><img {{bindAttr src='image'}} class='pull-right' width=150 /></li>
+  </ul>
+  {{#blog-post title=name image=image}}
+  <p class="author">by {{country}}</p>
+  {{time}}
+
+{{/blog-post}}
+
+  </script>
+  <script type="text/x-handlebars" id="components/blog-post">
+  <h1>{{title}} by components</h1>
+  <div class="body">{{yield}}</div>
+      <img {{bindAttr src='image'}} class='pull-right' width=150 />
+
+</script>
+
+</body>
+</html>
